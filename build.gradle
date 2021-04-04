@@ -59,7 +59,7 @@ String isDevTestString = project.property("isDevTest").toString()
 String content = "";
 String filePath = "buildnumber.txt";
 
-printf(new File('.').getAbsolutePath());
+println(new File('.').getAbsolutePath());
 
 try {
     content = new String(Files.readAllBytes(FileSystems.getDefault().getPath(project.getRootDir().getAbsolutePath(), filePath)));
@@ -81,12 +81,11 @@ output.write(newBuild.getBytes())
 output.flush()
 output.close()
 
-
 //boolean isDevTest = Boolean.parseBoolean(isDevTestString)
 
 version = vers + "." + release + '.' + buildNumber + "-" + stage + stageRelease
 group = 'com.qtech.forgemods'
-archivesBaseName = 'qforgemods-debugmenu'
+archivesBaseName = 'debugmenu'
 
 jar.version = version
 jar.archiveVersion.set(version)
@@ -150,7 +149,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                "qforgemods-debugmenu" {
+                "qforgemods-core" {
                     source sourceSets.main
                 }
             }
@@ -166,7 +165,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                "qforgemods-debugmenu" {
+                "qforgemods-core" {
                     source sourceSets.main
                 }
             }
@@ -182,7 +181,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the forgemod for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'qforgemods-debugmenu',
+            args '--mod', 'qforgemods-core',
                     '--all',
                     '--output', file('src/generated/resources/'),
                     '--existing', file('src/main/resources/'),
@@ -190,7 +189,7 @@ minecraft {
                     '--existing-mod', 'jei'
 
             mods {
-                "qforgemods-debugmenu" {
+                "qforgemods-core" {
                     source sourceSets.main
                 }
             }
@@ -258,9 +257,13 @@ dependencies {
     compileOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0.+")
     runtimeOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0.+")
 
-    // QModLib - Qboi's Library Mod.
-    implementation group: "com.qtech.commons", name: "commons", version: "1.0.+"
-    extraLibs group: "com.qtech.commons", name: "commons", version: "1.0.+"
+    // QFM Core
+    compileOnly fg.deobf(group: "com.qtech.forgemods", name: "core", version: "2.0.1363-b6")
+    runtimeOnly fg.deobf(group: "com.qtech.forgemods", name: "core", version: "2.0.1363-b6")
+
+    // QFM Action Menu
+    compileOnly fg.deobf(group: "com.qtech.forgemods", name: "actionmenu", version: "2.0.1373-b6")
+    runtimeOnly fg.deobf(group: "com.qtech.forgemods", name: "actionmenu", version: "2.0.1373-b6")
 
     compileOnly 'org.projectlombok:lombok:1.18.18'
     annotationProcessor 'org.projectlombok:lombok:1.18.18'
@@ -272,10 +275,7 @@ dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft(group: "net.minecraftforge", name: "forge", version: "${mc_version}-${forge_version}"){
-        force = true
-    }
-
+    minecraft group: "net.minecraftforge", name: "forge", version: "${mc_version}-${forge_version}"
     // https://mvnrepository.com/artifact/io.kaitai/kaitai-struct-runtime
     extraLibs group: 'io.kaitai', name: 'kaitai-struct-runtime', version: '0.9'
     compile group: 'io.kaitai', name: 'kaitai-struct-runtime', version: '0.9'
@@ -451,7 +451,7 @@ artifacts {
 jar {
     manifest {
         attributes([
-                "Main-Class": "com.qtech.forgemods.debugmenu.Main",
+                "Main-Class": "com.qtech.forgemods.core.Main",
                 "Specification-Title": "qforgemod-debugmenu",
                 "Specification-Vendor": "qtech-community",
                 "Specification-Version": version,
