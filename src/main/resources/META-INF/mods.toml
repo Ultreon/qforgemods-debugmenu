@@ -42,30 +42,35 @@ Qboi's Forge Mods: Debug Menu
 This is the debug menu mod for the Qboi's Forge Mod Series.
 It adds an more advanced debug menu in the game, using the F4 button as default.
 '''
-[[dependencies.qfm_debugmenu]]
-modId = "qfm_core"
-mandatory = true
-versionRange = "[2.0.1363,)"
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.qfm_debugmenu]] #optional
+# the modid of the dependency
+modId = "qfm_core" #mandatory
+# Does this dependency have to exist - if not, ordering below must be specified
+mandatory = true #mandatory
+# The version range of the dependency
+versionRange = "[2.0.1353,)" #mandatory
+# An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
 ordering = "AFTER"
+# Side this dependency is applied on - BOTH, CLIENT or SERVER
 side = "BOTH"
-
-[[dependencies.qfm_debugmenu]]
-modId = "qfm_actionmenu"
-mandatory = false
-versionRange = "[2.0.1373,)"
-ordering = "AFTER"
-side = "CLIENT"
-
-[[dependencies.qfm_debugmenu]]
-modId = "forge"
-mandatory = true
-versionRange = "[36,)"
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.qfm_debugmenu]] #optional
+# the modid of the dependency
+modId = "forge" #mandatory
+# Does this dependency have to exist - if not, ordering below must be specified
+mandatory = true #mandatory
+# The version range of the dependency
+versionRange = "[36,)" #mandatory
+# An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
 ordering = "NONE"
+# Side this dependency is applied on - BOTH, CLIENT or SERVER
 side = "BOTH"
-
+# Here's another dependency
 [[dependencies.qfm_debugmenu]]
 modId = "minecraft"
 mandatory = true
+# This version range declares a minimum of the current minecraft version up to but not including the next major version
 versionRange = "[1.16.5,1.17)"
 ordering = "NONE"
 side = "BOTH"
